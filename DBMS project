@@ -1,0 +1,58 @@
+#include<iostream>
+#include<fstream>
+#include<iomanip>
+#include<stdlib.h>
+
+using namespace std;
+
+class Student
+{
+ int admno;
+ char name[20];
+ char gender;
+ int std;
+ float marks;
+ float percentage;
+ 
+ public:
+  void getData();
+  void showData();
+  int getAdmno(){return admno;}
+}s;
+
+void Student::getData()
+{
+ cout<<"\n\nEnter Student Details......\n";
+ cout<<"Enter Admission No.     : "; cin>>admno;
+ cout<<"Enter Full Name         : "; cin.ignore(); cin.getline(name,20);
+ cout<<"Enter Gender (M/F)      : "; cin>>gender;
+ cout<<"Enter Standard          : "; cin>>std;
+ cout<<"Enter Marks (out of 500): "; cin>>marks;
+ cout<<endl;
+ percentage=marks*100.0/500.00;
+}
+
+void Student::showData()
+{
+ cout<<"\n\n.......Student Details......\n";
+ cout<<"Admission No.     : "<<admno<<endl;
+ cout<<"Full Name         : "<<name<<endl;
+ cout<<"Gender            : "<<gender<<endl;
+ cout<<"Standard          : "<<std<<endl;
+ cout<<"Marks (out of 500): "<<marks<<endl;
+ cout<<"Percentage        : "<<percentage<<endl;
+ cout<<endl;
+}
+
+void addData()
+{
+ ofstream fout;
+ fout.open("Students.dat",ios::binary|ios::out|ios::app);
+ s.getData();
+ fout.write((char*)&s,sizeof(s));
+ fout.close();
+ cout<<"\n\nData Successfully Saved to File....\n";
+}
+
+void displayData()
+{
